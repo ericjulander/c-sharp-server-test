@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User Test</title>
+</head>
+
+<body>
+    <h1>UserName</h1>
+    <input type="text" value="" id="username"="eric" />
+    <button id="get" value="get">SET</button>
+    
+    <div style="padding: 1.5%">
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script>
+        function start(username) {
+            var character = null;
+
+            function getCharacter() {
+                console.log("Starting...");
+                $.getJSON("http://10.5.188.48/get_data?username=" + username, function (json) {
+                    character = json;
+                    console.log(character);
+                });
+            }
+
+            getCharacter();
+
+
+            $("#get").click(function () {
+                console.log("CLICKED!")
+                $.post("http://10.5.188.48/", JSON.stringify({
+                    x: 0,
+                    y: 0,
+                    UserName: username,
+
+                })).done(function (data) {
+                    console.log(data)
+                });
+            });
+        }
+
+        $("#get").click(function () {
+            var username = $("#username").val();
+            if (username === "" || username === undefined || username === null) {
+                alert("Please Enter a Username");
+                return;
+            }
+            start(username);
+        });
+    </script>
+</body>
+
+</html>

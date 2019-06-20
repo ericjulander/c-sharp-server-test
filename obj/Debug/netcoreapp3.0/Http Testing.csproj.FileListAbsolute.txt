@@ -1,0 +1,14 @@
+C:\Users\eljulander\Documents\Http Testing\bin\Debug\netcoreapp3.0\Http Testing.exe
+C:\Users\eljulander\Documents\Http Testing\bin\Debug\netcoreapp3.0\Http Testing.deps.json
+C:\Users\eljulander\Documents\Http Testing\bin\Debug\netcoreapp3.0\Http Testing.runtimeconfig.json
+C:\Users\eljulander\Documents\Http Testing\bin\Debug\netcoreapp3.0\Http Testing.runtimeconfig.dev.json
+C:\Users\eljulander\Documents\Http Testing\bin\Debug\netcoreapp3.0\Http Testing.dll
+C:\Users\eljulander\Documents\Http Testing\bin\Debug\netcoreapp3.0\Http Testing.pdb
+C:\Users\eljulander\Documents\Http Testing\obj\Debug\netcoreapp3.0\Http Testing.csprojAssemblyReference.cache
+C:\Users\eljulander\Documents\Http Testing\obj\Debug\netcoreapp3.0\Http Testing.csproj.CoreCompileInputs.cache
+C:\Users\eljulander\Documents\Http Testing\obj\Debug\netcoreapp3.0\Http Testing.AssemblyInfoInputs.cache
+C:\Users\eljulander\Documents\Http Testing\obj\Debug\netcoreapp3.0\Http Testing.AssemblyInfo.cs
+C:\Users\eljulander\Documents\Http Testing\obj\Debug\netcoreapp3.0\Http Testing.dll
+C:\Users\eljulander\Documents\Http Testing\obj\Debug\netcoreapp3.0\Http Testing.pdb
+C:\Users\eljulander\Documents\Http Testing\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
+C:\Users\eljulander\Documents\Http Testing\obj\Debug\netcoreapp3.0\Http Testing.csproj.CopyComplete
