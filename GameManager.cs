@@ -10,13 +10,12 @@ namespace GameManager
         }
 
         public void AddBlobDude(BlobDude b){
-            System.Console.WriteLine(b.userName +"USERNAME");
             Characterz.Add(b.userName, b);
         }
 
-        public void updateParameters(movement m, string UserName){
+        public void updateParameters(Point m, string UserName){
             Characterz[UserName].x = m.x;
-            Characterz[UserName].y = m.x;
+            Characterz[UserName].y = m.y;
         }
 
     }    

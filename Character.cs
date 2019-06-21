@@ -1,12 +1,20 @@
 using System;
 namespace Character
 {
-    interface IGameObject
+    interface IGamePoint
     {
 
         int x { get; set; }
         int y { get; set; }
 
+    }
+
+    public class Point :IGamePoint{
+        public int x { get; set; }
+        public int y { get; set; }
+    }
+    interface IGameObject:IGamePoint
+    {
         int width { get; set; }
         int height { get; set; }
 

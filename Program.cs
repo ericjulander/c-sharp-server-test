@@ -55,28 +55,60 @@ namespace Http_Testing
         }
 
 
+        public static string getUserName(HttpListenerRequest request, Regex usernameRegex){
+            var match = usernameRegex.Match(request.RawUrl);
+            var username = match.Groups[2].Value;
+            return username;
+        }
+         static string setUpUser(HttpListenerRequest request, Regex usernameRegex, Game g)
+        {
+            var username = getUserName(request, usernameRegex);
+            System.Console.WriteLine(username);
+            if (!g.Characterz.ContainsKey(username))
+            {
+                g.AddBlobDude(new Character.BlobDude(username, 0, 0, 50, 50));
+            }
+            return username;
+        }
+         static string setUser(HttpListenerRequest request, Regex usernameRegex, Game g, string point)
+        {
+            var username = setUpUser(request,usernameRegex, g);
+            g.updateParameters(JsonConvert.DeserializeObject<Character.Point>(point), username);
+            return username;
+        }
+
         public static void doThatThing(HttpListener listener, Regex usernameRegex, Game g)
         {
             HttpListenerContext context = listener.GetContext();
             HttpListenerRequest request = context.Request;
-            if(request.Url.Equals("http://localhost/")){
+            
+            if (request.Url.Equals("http://10.5.188.48/"))
+            {
                 writeResponse(context, System.IO.File.ReadAllText("./test.html"));
                 return;
             }
-            if(request.Url.Equals("http://localhost/getusers")){
+            if (request.Url.ToString().Contains("http://10.5.188.48/getusers"))
+            {
                 writeResponse(context, JsonConvert.SerializeObject(g.Characterz));
                 return;
             }
-            var match = usernameRegex.Match(request.RawUrl);
-            var username = match.Groups[2].Value;
-            System.Console.WriteLine(username);
-            if (!g.Characterz.ContainsKey(username))
+            if (request.Url.ToString().Contains("http://10.5.188.48/getuser"))
             {
-                g.AddBlobDude(new Character.BlobDude(username, 0,0,50,50));
+                var usernamez = setUpUser(request, usernameRegex, g);
+                writeResponse(context, JsonConvert.SerializeObject(g.Characterz[usernamez]));
+                return;
             }
-            writeResponse(context, JsonConvert.SerializeObject(g.Characterz[username]));
+            if (request.Url.ToString().Contains("http://10.5.188.48/setuser"))
+            {
+                var json = ShowRequestData(request);
+                System.Console.WriteLine("JSON!!!! "+json);
+                writeResponse(context, JsonConvert.SerializeObject(g.Characterz[setUser(request, usernameRegex, g, json)]));
+                return;
+            }
+            var username = setUpUser(request, usernameRegex, g);
             ShowRequestData(request);
-            System.Console.WriteLine("Moving On...");
+            writeResponse(context, JsonConvert.SerializeObject(g.Characterz[username]));
+            //writeResponse(context, "yolo");
             // Obtain a response object.
 
         }
@@ -96,12 +128,12 @@ namespace Http_Testing
             // You must close the output stream.
             output.Close();
         }
-        public static void ShowRequestData(HttpListenerRequest request)
+        public static string ShowRequestData(HttpListenerRequest request)
         {
             if (!request.HasEntityBody)
             {
                 Console.WriteLine("No client data was sent with the request.");
-                return;
+                return "";
             }
             System.IO.Stream body = request.InputStream;
             System.Text.Encoding encoding = request.ContentEncoding;
@@ -119,6 +151,8 @@ namespace Http_Testing
             Console.WriteLine("End of client data:");
             body.Close();
             reader.Close();
+            if(s == null) s =""; 
+            return s;
             // If you are finished with the request, it should be closed also.
         }
 
