@@ -32,7 +32,7 @@ namespace Http_Testing
         static void Main(string[] args)
         {
             Console.WriteLine();
-            var listener = generateFromPrefixes(new[] { "http://localhost/", "http://10.5.188.48/" });
+            var listener = generateFromPrefixes(new[] { "http://localhost/" });
             listenAndDoStuff(listener, true);
         }
 
@@ -82,26 +82,26 @@ namespace Http_Testing
             HttpListenerContext context = listener.GetContext();
             HttpListenerRequest request = context.Request;
             
-            if (request.Url.Equals("http://10.5.188.48/"))
+            if (request.Url.Equals("http://localhost/"))
             {
                 writeResponse(context, System.IO.File.ReadAllText("./test.html"));
                 return;
             }
-            if (request.Url.ToString().Contains("http://10.5.188.48/getusers"))
+            if (request.Url.ToString().Contains("http://localhost/getusers"))
             {
                 writeResponse(context, JsonConvert.SerializeObject(g.Characterz));
                 return;
             }
-            if (request.Url.ToString().Contains("http://10.5.188.48/getuser"))
+            if (request.Url.ToString().Contains("http://localhost/getuser"))
             {
                 var usernamez = setUpUser(request, usernameRegex, g);
                 writeResponse(context, JsonConvert.SerializeObject(g.Characterz[usernamez]));
                 return;
             }
-            if (request.Url.ToString().Contains("http://10.5.188.48/setuser"))
+            if (request.Url.ToString().Contains("http://localhost/setuser"))
             {
                 var json = ShowRequestData(request);
-                System.Console.WriteLine("JSON!!!! "+json);
+                System.Console.WriteLine(json);
                 writeResponse(context, JsonConvert.SerializeObject(g.Characterz[setUser(request, usernameRegex, g, json)]));
                 return;
             }

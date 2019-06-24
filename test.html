@@ -1,30 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="eng">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>User Test</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <h1>UserName</h1>
-    <input type="text" value="" id="username"="eric" />
-    <button id="get" value="get">SET</button>
-    <h1>Move</h1>
-    <button id="right" value="get">RIGHT</button>
-    <canvas id="myCanvas" width="800" height="600"></canvas>
+        <div class="jumbotron">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">@</span>
+                            </div>
+                            <input type="text" class="form-control" id="username" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1">
+                            <button class="btn btn-info" id="get" value="get">SET</button>
+                        </div>
+                    </div>
+                </div>
+        <hr class="my-4">
+        <h3>Move</h3>
+        <div class="row">
+            <div class="col-sm">
+                <button class="btn btn-danger" id="left" value="get">LEFT</button>
+
+                <button class="btn btn-primary" id="right" value="get">RIGHT</button>
+            </div>
+        </div>
+    </div>
+    <canvas class="w-100 p-3 rounded-pill shadow-lg p-3 mb-5 bg-green rounded " id="myCanvas" width="800"
+        height="600"></canvas>
     <div style="padding: 1.5%">
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
     <script>
         var started = false;
-        var colors =["#f0f8ff","#faebd7","#00ffff","#7fffd4","#f0ffff","#f5f5dc","#ffe4c4","#ffebcd","#0000ff","#8a2be2","#a52a2a","#deb887","#5f9ea0","#7fff00","#d2691e","#ff7f50","#6495ed","#fff8dc","#dc143c","#00ffff","#00008b","#008b8b","#b8860b","#a9a9a9","#a9a9a9","#006400","#bdb76b","#8b008b","#556b2f","#ff8c00","#9932cc","#8b0000","#e9967a","#8fbc8f","#483d8b","#2f4f4f","#2f4f4f","#00ced1","#9400d3","#ff1493","#00bfff","#696969","#696969","#1e90ff","#b22222","#fffaf0","#228b22","#ff00ff","#dcdcdc","#f8f8ff","#ffd700","#daa520","#808080","#808080","#008000","#adff2f","#f0fff0","#ff69b4","#cd5c5c","#4b0082","#fffff0","#f0e68c","#e6e6fa","#fff0f5","#7cfc00","#fffacd","#add8e6","#f08080","#e0ffff","#fafad2","#d3d3d3","#d3d3d3","#90ee90","#ffb6c1","#ffa07a","#20b2aa","#87cefa","#778899","#778899","#b0c4de","#ffffe0","#00ff00","#32cd32","#faf0e6","#ff00ff","#800000","#66cdaa","#0000cd","#ba55d3","#9370db","#3cb371","#7b68ee","#00fa9a","#48d1cc","#c71585","#191970","#f5fffa","#ffe4e1","#ffe4b5","#ffdead","#000080","#fdf5e6","#808000","#6b8e23","#ffa500","#ff4500","#da70d6","#eee8aa","#98fb98","#afeeee","#db7093","#ffefd5","#ffdab9","#cd853f","#ffc0cb","#dda0dd","#b0e0e6","#800080","#663399","#ff0000","#bc8f8f","#4169e1","#8b4513","#fa8072","#f4a460","#2e8b57","#fff5ee","#a0522d","#c0c0c0","#87ceeb","#6a5acd","#708090","#708090","#fffafa","#00ff7f","#4682b4","#d2b48c","#008080","#d8bfd8","#ff6347","#40e0d0","#ee82ee","#f5deb3","#ffffff","#f5f5f5","#ffff00","#9acd32"];
+        var colors = ["#f0f8ff", "#faebd7", "#00ffff", "#7fffd4", "#f0ffff", "#f5f5dc", "#ffe4c4", "#ffebcd", "#0000ff",
+            "#8a2be2", "#a52a2a", "#deb887", "#5f9ea0", "#7fff00", "#d2691e", "#ff7f50", "#6495ed", "#fff8dc",
+            "#dc143c", "#00ffff", "#00008b", "#008b8b", "#b8860b", "#a9a9a9", "#a9a9a9", "#006400", "#bdb76b",
+            "#8b008b", "#556b2f", "#ff8c00", "#9932cc", "#8b0000", "#e9967a", "#8fbc8f", "#483d8b", "#2f4f4f",
+            "#2f4f4f", "#00ced1", "#9400d3", "#ff1493", "#00bfff", "#696969", "#696969", "#1e90ff", "#b22222",
+            "#fffaf0", "#228b22", "#ff00ff", "#dcdcdc", "#f8f8ff", "#ffd700", "#daa520", "#808080", "#808080",
+            "#008000", "#adff2f", "#f0fff0", "#ff69b4", "#cd5c5c", "#4b0082", "#fffff0", "#f0e68c", "#e6e6fa",
+            "#fff0f5", "#7cfc00", "#fffacd", "#add8e6", "#f08080", "#e0ffff", "#fafad2", "#d3d3d3", "#d3d3d3",
+            "#90ee90", "#ffb6c1", "#ffa07a", "#20b2aa", "#87cefa", "#778899", "#778899", "#b0c4de", "#ffffe0",
+            "#00ff00", "#32cd32", "#faf0e6", "#ff00ff", "#800000", "#66cdaa", "#0000cd", "#ba55d3", "#9370db",
+            "#3cb371", "#7b68ee", "#00fa9a", "#48d1cc", "#c71585", "#191970", "#f5fffa", "#ffe4e1", "#ffe4b5",
+            "#ffdead", "#000080", "#fdf5e6", "#808000", "#6b8e23", "#ffa500", "#ff4500", "#da70d6", "#eee8aa",
+            "#98fb98", "#afeeee", "#db7093", "#ffefd5", "#ffdab9", "#cd853f", "#ffc0cb", "#dda0dd", "#b0e0e6",
+            "#800080", "#663399", "#ff0000", "#bc8f8f", "#4169e1", "#8b4513", "#fa8072", "#f4a460", "#2e8b57",
+            "#fff5ee", "#a0522d", "#c0c0c0", "#87ceeb", "#6a5acd", "#708090", "#708090", "#fffafa", "#00ff7f",
+            "#4682b4", "#d2b48c", "#008080", "#d8bfd8", "#ff6347", "#40e0d0", "#ee82ee", "#f5deb3", "#ffffff",
+            "#f5f5f5", "#ffff00", "#9acd32"
+        ];
+
         function start(username) {
 
             function renderBG() {
                 var canvas = document.getElementById("myCanvas");
                 var ctx = canvas.getContext("2d");
-                ctx.fillStyle = "#FFFFFF";
+                ctx.fillStyle = "#00FF00";
                 ctx.fillRect(0, 0, 800, 600);
             }
 
@@ -34,7 +82,7 @@
                 ctx.fillStyle = color;
                 ctx.fillRect(cobject.x, cobject.y, cobject.width, cobject.height);
                 ctx.font = "30px Arial";
-                ctx.strokeText(cobject.userName, cobject.x, 50);
+                ctx.strokeText(cobject.userName, cobject.x, cobject.y + 50);
             }
             var blobz = {};
 
@@ -43,7 +91,7 @@
                 started = true;
                 setInterval(() => {
 
-                    $.getJSON("http://10.5.188.48/getusers", function (characters) {
+                    $.getJSON("http://localhost/getusers", function (characters) {
                         blobz = (characters);
                     });
                     var ind = 0;
@@ -59,8 +107,10 @@
             var character = null;
 
             function getCharacter(callback) {
-                $.getJSON("http://10.5.188.48/getuser?username=" + username, function (json) {
+                $.getJSON("http://localhost/getuser?username=" + username, function (json) {
                     character = json;
+                    if (character.y === 0)
+                        character.y += 200;
                     if (!started) startRenders();
                 });
             }
@@ -68,7 +118,7 @@
             getCharacter();
 
             function setCharacter(callback) {
-                $.post("http://10.5.188.48/setuser?username=" + username, JSON.stringify({
+                $.post("http://localhost/setuser?username=" + username, JSON.stringify({
                     x: character.x,
                     y: character.y,
                     UserName: username,
@@ -79,11 +129,31 @@
             }
 
             $("#right").click(function () {
-                character.x++;
-                setCharacter(function (data) {});
+                var index = 0;
+
+                function doThatThing() {
+                    character.x++;
+                    setCharacter(function (data) {
+                        if (index++ < 25)
+                            doThatThing();
+                    });
+                }
+                doThatThing();
+            });
+            $("#left").click(function () {
+                var index = 0;
+
+                function doThatThing() {
+                    character.x--;
+                    setCharacter(function (data) {
+                        if (index++ < 25)
+                            doThatThing();
+                    });
+                }
+                doThatThing();
             });
             $("#get").click(function () {
-                $.post("http://10.5.188.48/", JSON.stringify({
+                $.post("http://localhost/", JSON.stringify({
                     x: 0,
                     y: 0,
                     UserName: username,
